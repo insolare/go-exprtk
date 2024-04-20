@@ -29,6 +29,21 @@ struct  ExprtkStruct
     exprtk::symbol_table<double> symbolTable;
     exprtk::expression<double> expression;
     exprtk::parser<double> parser;
+
+    ~ExprtkStruct(){
+        for (int i = 0; i < doubleValue.size();i++){
+            delete doubleValue[i];
+            doubleValue[i] = nullptr;
+        }
+        for (int i = 0; i < stringValue.size();i++){
+            delete stringValue[i];
+            stringValue[i] = nullptr;
+        }
+        for (int i = 0; i < vectorValue.size();i++){
+            delete vectorValue[i];
+            vectorValue[i] = nullptr;
+        }
+    }
 };
 
 exprtkWrapper exprtkWrapperInit()

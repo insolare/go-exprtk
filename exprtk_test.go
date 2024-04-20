@@ -2,7 +2,6 @@ package exprtk
 
 import (
 	"fmt"
-	"math"
 	"reflect"
 	"testing"
 )
@@ -22,10 +21,11 @@ func TestCompileExpression(t *testing.T) {
 
 	exprtkObj.SetExpression("x.1 + y.1")
 
-	exprtkObj.AddDoubleVariable("x.1")
-	exprtkObj.AddDoubleVariable("y.1")
+	exprtkObj.AddDoubleVariable("[x.1]")
+	exprtkObj.AddDoubleVariable("[y.1]")
 
 	err := exprtkObj.CompileExpression()
+
 	if err.Error() != "failed to compile the expression" {
 		t.Error("negative case failed")
 	}
@@ -87,7 +87,8 @@ func TestMixedVariables(t *testing.T) {
 
 	eqnStr = "avg"
 	exprtkObj.SetStringVariableValue("eqn", eqnStr)
-	if math.Round(exprtkObj.GetEvaluatedValue()*10)/10 != 2.1 {
+	result := exprtkObj.GetEvaluatedValue()
+	if (result*10)/10 != 2.1 {
 		t.Error("Incorrect Value")
 	}
 

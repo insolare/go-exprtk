@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/Pramod-Devireddy/go-exprtk"
+	"github.com/insolare/go-exprtk"
 )
 
 func example02() {
 	var eqn string
-	eqn = "if (eqn == 'avg') avg(x); "
-	eqn += "else if (eqn == 'max') max(x); "
+	eqn = "if (eqn == 'avg') avg(10, 20); "
+	eqn += "else if (eqn == 'max') println('max'); "
 	eqn += "else if (eqn == 'min') min(x); "
 	eqn += "else if (eqn == 'sum') sum(x); "
 	eqn += "else 0; "
@@ -24,7 +24,8 @@ func example02() {
 	exprtkObj.SetExpression(eqn)
 	exprtkObj.AddStringVariable("eqn")
 	exprtkObj.AddVectorVariable("x")
-	exprtkObj.CompileExpression()
+	err := exprtkObj.CompileExpression()
+	fmt.Println("Err", err)
 	exprtkObj.SetVectorVariableValue("x", array)
 
 	eqnStr = "avg"
